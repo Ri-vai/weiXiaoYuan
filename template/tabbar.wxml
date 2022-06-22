@@ -1,0 +1,78 @@
+<template name="tabBar">
+<view class="padding-sm bg-white text-gray" style="position:fixed;bottom:0;width:100%;border-top-left-radius: 80rpx;border-top-right-radius: 80rpx;box-shadow: 0px 0px 4px 0px gray;height:140rpx;">
+    <view class="flex text-center">
+      <view class="flex-sub">
+      <navigator hover-class="none" open-type="redirect" url="index">
+        <view><image style="width: 40rpx;height: 40rpx;" src="/img/home{{pagepath!='pages/index/index'?'-u':''}}.png" mode="aspectFill"></image></view>
+        <view class="text-xs {{pagepath!='pages/index/index'?'':'text-red'}}">主页</view>
+        </navigator>
+      </view>
+      <view class="flex-sub">
+      <navigator hover-class="none" open-type="redirect" url="my">
+        <view><image style="width: 40rpx;height: 40rpx;" src="/img/my{{pagepath!='pages/index/my'?'-u':''}}.png" mode="aspectFill"></image></view>
+        <view class="text-xs {{pagepath!='pages/index/my'?'':'text-red'}}">我的</view>
+        </navigator>
+      </view>
+    </view>
+</view>
+</template>
+
+<template name="projectTabBar">
+<view class="padding-sm bg-white text-gray" style="position:fixed;bottom:0;width:100%;box-shadow: 0px 0px 4px 0px gray;height:140rpx;">
+    <view class="flex text-center">
+      <view class="flex-sub" bindtap="showModal" data-target="bottomModal">
+        <view><image style="width: 40rpx;height: 40rpx;" src="/img/share.png" mode="aspectFill"></image></view>
+        <view class="text-sm">分享</view>
+      </view>
+      <view class="flex-twice margin-right-xs">
+        <view class="text-lg bg-black" style="line-height:80rpx;height:80rpx;border-top-left-radius:50rpx;border-bottom-left-radius:50rpx;border-top-right-radius:10rpx;border-bottom-right-radius:10rpx;" data-phone="{{data.metadata[0].zixundianhua!=undefined&&data.metadata[0].zixundianhua!=''?data.metadata[0].zixundianhua+'':data.metadata[0].adviser[0].metadata[0].adviserphone+''}}" bindtap="callphone">免费咨询</view>
+      </view>
+      <view class="flex-twice">
+      <navigator hover-class="none" url="form?formid={{data.metadata[0].yuyuekanfang.formid}}&loupan={{data.title}}">
+        <view class="text-lg bg-red" style="line-height:80rpx;height:80rpx;border-top-left-radius:10rpx;border-bottom-left-radius:10rpx;border-top-right-radius:50rpx;border-bottom-right-radius:50rpx;" >预约看房</view>
+        </navigator>
+      </view>
+    </view>
+</view>
+
+<view class="cu-modal bottom-modal {{modalName=='bottomModal'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="padding-xl">
+      <view class="flex">
+      <view class="flex-sub">
+      <button open-type="share" style="width: 100%;padding: 0;font-weight:normal;font-size:14px;">
+        <view><image style="width: 100rpx;height: 100rpx;" src="/img/wechat.png" mode="aspectFill"></image></view>
+        <view class="text-sm">微信好友</view>
+      </button>
+      </view>
+      <view class="flex-sub">
+      <button style="width: 100%;padding: 0;font-weight:normal;font-size:14px;" bindtap="shareTimeline" data-projectid="{{data.id}}">
+        <view><image style="width: 100rpx;height: 100rpx;" src="/img/circle{{data.metadata[0].share.length>0?'':'-u'}}.png" mode="aspectFill"></image></view>
+        <view class="text-sm">朋友圈</view>
+      </button>
+      </view>
+      </view>
+      <view class="radius solid text-gray margin-sm padding-sm" bindtap="hideModal">取消</view>
+    </view>
+  </view>
+</view>
+</template>
+
+
+<template name="imagesTabBar">
+<view class="padding-sm bg-white text-gray padding-left-xl padding-right-xl" style="position:fixed;bottom:0;width:100%;box-shadow: 0px 0px 4px 0px gray;height:140rpx;">
+    <view class="flex text-left">
+      <view class="flex-sub">
+        <button open-type="share" style="width: 100%;padding: 0;font-weight:normal;font-size:14px;background: #fff;">
+          <view><image style="width: 80rpx;height: 80rpx;" src="/img/share-weixin.png" mode="aspectFill"></image></view>
+        </button>
+      </view>
+      <view class="flex-sub">
+        <view bindtap="shareTimeline"><image style="width: 80rpx;height: 80rpx;" src="/img/share-image{{data.metadata[0].shareimages[0].image?'':'-u'}}.png" mode="aspectFill"></image></view>
+      </view>
+      <view class="flex-treble">
+        <view class="text-lg {{data.heartcheck?'bg-gray':'bg-red'}} text-center" style="line-height:80rpx;height:80rpx;border-radius:50rpx;" bindtap="{{data.heartcheck?'delheart':'addheart'}}">{{data.heartcheck?'已赞':'点赞'}}</view>
+      </view>
+    </view>
+</view>
+</template>

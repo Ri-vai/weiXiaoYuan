@@ -1,0 +1,28 @@
+/* custom-tab-bar/index.wxss */
+
+.flex {
+  display: flex;
+}
+.flex-sub {
+  flex: 1;
+}
+.padding-sm {
+  padding: 20rpx;
+}
+.bg-white {
+  background-color: #fff;
+  color: #666;
+}
+.text-gray, .line-gray, .lines-gray {
+  color: #aaa;
+}
+
+.text-center {
+  text-align: center;
+}
+.text-xs {
+  font-size: 20rpx;
+}
+.text-red, .line-red, .lines-red {
+  color: #b5001f;
+}

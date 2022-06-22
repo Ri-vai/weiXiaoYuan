@@ -1,0 +1,102 @@
+<template name="loginmodal">
+
+	<view class="cu-modal {{modalName=='loginmodal'?'show':''}}">
+		<view class="cu-dialog" style="width: 510rpx;">
+			<view class="cu-bar bg-red" style="height: 180rpx;">
+				<view class="content" style="width:100%;height: 140rpx;line-height:50rpx;padding-top: 30rpx;">
+					<view class="text-xl">广东以色列理工学院</view>
+					<view class="text-sm">官方小程序</view>
+				</view>
+			</view>
+			<view class="padding-xl bg-white text-center">
+				<view class="flex" style="width:80%;margin:auto;">
+					<view class="text-center flex-sub">
+						<view class="text-center" style="font-size:26rpx;line-height:38rpx;">需登陆后才能使用此功能</view>
+					</view>
+				</view>
+			</view>
+			<view class="bg-white padding-left padding-right padding-bottom">
+				<view class="flex" style="margin: auto;">
+					<button class="text-sm margin-right-sm padding-left-xs padding-right-xs" style="width:180rpx;background-color: #eee;color:#555;" bindtap="hideModal">取消</button>
+					<button class="text-sm bg-red margin-left-sm padding-left-xs padding-right-xs" style="width:180rpx;" open-type="getUserInfo" bindgetuserinfo="navigatemy">一键登录</button>
+
+				</view>
+			</view>
+		</view>
+	</view>
+</template>
+
+<template name="getphonemodal">
+
+	<view class="cu-modal {{modalName=='getphonemodal'?'show':''}}">
+		<view class="cu-dialog" style="width: 510rpx;">
+			<view class="cu-bar bg-red" style="height: 90rpx;">
+				<view class="content" style="width:100%;height: 70rpx;line-height:25rpx;padding-top: 15rpx;">
+					<view class="text-sm">需获取您的手机号码才能预约</view>
+				</view>
+			</view>
+			<view class="bg-white padding">
+				<view class="flex" style="margin: auto;">
+					<button class="text-sm margin-right-sm padding-left-xs padding-right-xs" style="width:180rpx;background-color: #eee;color:#555;" bindtap="hideModal">取消</button>
+					<button class="text-sm bg-red margin-left-sm padding-left-xs padding-right-xs" style="width:180rpx;" open-type="getPhoneNumber" bindgetphonenumber="navigatemytogetphone">一键授权</button>
+
+				</view>
+			</view>
+		</view>
+	</view>
+</template>
+
+<template name="qrcodemodal">
+
+	<view class="cu-modal {{modalName=='qrcodemodal'?'show':''}}" bindtap="hideModal">
+		<view class="cu-dialog" style="width: 590rpx;">
+			<view class="cu-bar bg-white" style="height: 500rpx;">
+				<block wx:if="{{qrcode!=''}}">
+					<view class="content padding-top" style="width:100%;height:400rpx;line-height:50rpx;">
+						<image style="width:300rpx;height:300rpx;" show-menu-by-longpress src="{{qrcode}}" mode="aspectFit" wx:if="{{qrcode!=''}}"></image>
+						<view style="height:50rpx;line-height:50rpx;">{{qrcodetext}}</view>
+					</view>
+				</block>
+				<block wx:else>
+					<view class="content" style="width:100%;line-height:50rpx;">
+						<view style="height:50rpx;">{{qrcodetext}}</view>
+					</view>
+				</block>
+			</view>
+			<view class="bg-white padding-left padding-right padding-bottom">
+				<view class="flex" style="margin: auto;">
+					<button class="text-sm margin-right-sm padding-left-xs padding-right-xs" style="width:180rpx;background-color: #eee;color:#555;" bindtap="hideModal">取消</button>
+					<block wx:if="{{qrcode!=''}}">
+						<button class="text-sm bg-red margin-left-sm padding-left-xs padding-right-xs" style="width:180rpx;" bindtap="saveqrcode" data-src="{{qrcode}}">保存</button>
+					</block>
+					<block wx:else>
+						<button class="text-sm bg-red margin-left-sm padding-left-xs padding-right-xs" style="width:180rpx;" bindtap="copyqrcodetext" data-qrcodetext="{{qrcodetext}}">复制</button>
+					</block>
+				</view>
+			</view>
+		</view>
+	</view>
+</template>
+
+<template name="attentionmodal">
+
+	<view class="cu-modal {{modalName=='attentionmodal'?'show':''}}">
+		<view class="cu-dialog" style="width: 510rpx;">
+			<view class="padding-top-xl padding-bottom-xl padding-right padding-left bg-white text-center">
+				<view class="flex" style="width:90%;margin:auto;">
+					<view class="text-center flex-sub">
+						<image src="{{baseMediaUrl}}微信图片_20200723235632.jpg" show-menu-by-longpress style="width:300rpx;height:300rpx" mode="aspectFill"></image>
+						<view class="text-center" style="font-size:26rpx;line-height:38rpx;">终于等到你！请将图片保存至手机相册，扫描二维码进行参观预约～期待你的到来</view>
+					</view>
+				</view>
+			</view>
+			<view class="bg-white padding-left padding-right padding-bottom">
+				<view class="flex" style="margin: auto;">
+					<button class="text-sm margin-right-sm padding-left-xs padding-right-xs" style="width:180rpx;background-color: #eee;color:#555;" bindtap="hideModal">关闭</button>
+					<button class="text-sm bg-red margin-left-sm padding-left-xs padding-right-xs" style="width:180rpx;" bindtap="saveqrcode" data-src="{{baseMediaUrl}}微信图片_20200723235632.jpg">保存</button>
+
+				</view>
+			</view>
+		</view>
+	</view>
+</template>

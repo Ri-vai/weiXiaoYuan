@@ -1,0 +1,24 @@
+<view class="padding-sm bg-white text-gray" style="position:fixed;bottom:0;width:100%;border-top-left-radius: 80rpx;border-top-right-radius: 80rpx;box-shadow: 0px 0px 4px 0px gray;height:140rpx;">
+    <view class="flex text-center">
+      <view class="flex-sub">
+      <navigator hover-class="none" open-type="switchTab" url="index">
+        <view><image style="width: 40rpx;height: 40rpx;" src="/img/index-icon{{pagepath!='pages/index/index'?'-u':''}}.png" mode="aspectFill"></image></view>
+        <view class="text-xs {{pagepath!='pages/index/index'?'':'text-red'}}">主页</view>
+        </navigator>
+      </view>
+
+      <view class="flex-sub">
+      <navigator hover-class="none" open-type="switchTab" url="work">
+        <view><image style="width: 40rpx;height: 40rpx;" src="/img/work{{pagepath!='pages/index/work'?'-u':''}}.png" mode="aspectFill"></image></view>
+        <view class="text-xs {{pagepath!='pages/index/work'?'':'text-red'}}">办事</view>
+        </navigator>
+      </view>
+      
+      <view class="flex-sub">
+      <navigator hover-class="none" open-type="switchTab" url="my">
+        <view><image style="width: 40rpx;height: 40rpx;" src="/img/my-icon{{pagepath!='pages/index/my'?'-u':''}}.png" mode="aspectFill"></image></view>
+        <view class="text-xs {{pagepath!='pages/index/my'?'':'text-red'}}">我的</view>
+        </navigator>
+      </view>
+    </view>
+</view>

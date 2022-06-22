@@ -1,0 +1,415 @@
+<wxs src="utils.wxs" module="utils" />
+
+<template name="newsList">
+	<block wx:for="{{data}}">
+		<block wx:if="{{limit!=null?(index<limit):true}}">
+			<view class="margin-left margin-right padding-top-sm padding-bottom-sm bg-white text-black solid-bottom" data-url="/pages/news/news" data-id="{{item.id+''}}" bindtap="navigatePage">
+				<view class="" style="width:100%;height:180rpx;">
+					<view class="" style="float:left;width: 57%;">
+						<view
+							style="font-size:30rpx;font-weight:bold;line-height:42rpx;height:126rpx;text-overflow: ellipsis;overflow: hidden;">
+							{{item.title}}</view>
+						<view class="text-gray" style="font-size:26rpx;line-height:81rpx;height:54rpx;">{{item.viewcount||1}} 阅读</view>
+					</view>
+					<view class="margin-left-xs" style="float: right;width: 40%;">
+						<image class="radius" style="width:100%;height:180rpx;border-radius:10rpx;"
+							src="{{baseMediaUrl+item.featured_images[0].image}}" mode="aspectFit"></image>
+					</view>
+				</view>
+			</view>
+	</block>
+	</block>
+</template>
+
+<template name="activityList">
+	<block wx:for="{{data}}">
+		<block wx:if="{{limit!=null?(index<limit):true}}">
+			<view class="margin-left margin-right padding-top-sm padding-bottom-sm bg-white text-black {{limit<=1||utils.count(data)<=1?'':'solid-bottom'}}">
+				<view class="flex">
+					<view class="flex-sub margin-right-xs" data-url="forminfo"
+						data-formid="{{item.formid}}"	data-id="{{id}}" bindtap="navigatePage">
+						<image class="radius" style="width:240rpx;height:180rpx;border-radius:10rpx;"
+							src="{{baseMediaUrl+item.metadata[0].featured_images[0].image}}" mode="aspectFill"></image>
+					</view>
+					<view class="flex-twice margin-left-xs">
+						<view style="font-size:28rpx;font-weight:bold;line-height:42rpx;height:128rpx;text-overflow: ellipsis;overflow: hidden;" data-url="forminfo"
+						data-formid="{{item.formid}}"	data-id="{{id}}" bindtap="navigatePage">
+							{{item.title}}</view>
+						<view class="flex" style="height:54rpx;">
+							<view style="width:60%;"></view>
+								<block wx:if="{{utils.compareDatenow(item.endtime)<=0?true:false}}">
+									<view class="bg-red text-center" style="width:40%;border-radius:50px;font-size:26rpx;line-height:52rpx;height:52rpx;">
+											<navigator hover-class="none" url="form?formid={{item.formid}}&{{params}}">立即报名</navigator>
+									</view>
+								</block>
+								<block wx:else>
+									<view class="bg-gray text-center" style="width:40%;border-radius:50px;font-size:26rpx;line-height:52rpx;height:52rpx;">
+											<view>已结束</view>
+									</view>
+								</block>
+						</view>
+					</view>
+				</view>
+			</view>
+		</block>
+	</block>
+</template>
+
+<template name="formList">
+	<view class="flex" style="justify-content: space-between;flex-direction: row;flex-wrap: wrap;">
+		<block wx:for="{{data}}">
+			<block wx:if="{{limit!=null?(index<limit):true}}">
+				<view class="padding-top-sm padding-bottom-sm bg-white text-black" style="width:50%;">
+					<view class="flex-sub text-center">
+						<navigator hover-class="none" url="form?formid={{item.formid}}">
+							<image style="width:300rpx;height:178rpx;border-radius:10rpx;max-width:100%;"
+								src="{{baseMediaUrl+item.metadata[0].featured_images[0].image}}" mode="aspectFill"></image>
+						</navigator>
+					</view>
+				</view>
+			</block>
+		</block>
+	</view>
+</template>
+
+<template name="textList">
+<import src="/template/title.wxml"/>
+	<view class="padding-top-sm bg-white text-black">
+		<block wx:for="{{labeldata}}">
+			<block wx:if="{{item.type=='section'}}">
+				<block wx:if="{{index>0}}">
+					<template is="divider"/>
+				</block>
+			</block>
+			<block wx:else>
+				<block wx:if="{{data[item.id]!=null}}">
+					<view class="margin-left margin-right padding-sm" style="">
+						<view class="text-gray labeltext" style="width:150rpx;height: 50rpx;margin-right:40rpx;text-align: justify;text-align-last: justify;float:left;">
+							{{item.label}}：
+						</view>
+						<view class="text-black" style="width:440rpx;float:left;line-height:50rpx;">
+							{{data[item.id]}}
+						</view>
+						<view class="" style="clear:both;">
+						</view>
+					</view>
+				</block>
+			</block>
+		</block>
+	</view>
+</template>
+
+<template name="imageList">
+<import src="/template/title.wxml"/>
+		<block wx:for="{{data}}">
+				<block wx:if="{{index>0}}">
+					<template is="divider"/>
+				</block>
+				<block wx:if="{{item.type=='image'}}">
+			<view class="padding-sm padding-top-sm padding-bottom-sm bg-white text-black">
+				<view class="padding-top padding-bottom margin-left margin-right text-bold text-lg">{{item.name}}</view>
+					<view class="margin-left margin-right padding-top-sm padding-bottom-sm">
+						<view class="text-gray">
+							<image style="width:100%;height: 100%;" src="{{baseMediaUrl+images.image}}" mode="aspectFill" style="width:30vw;min-width: 92px;max-width:33.3%;height:30vw;min-height:92px;padding: 7rpx;" wx:for="{{item.images}}" wx:for-index="imageidx" wx:for-item="images" bindtap="projectpreviewImage" data-src="{{images.image}}" data-imagesidx="{{index}}"></image>
+						</view>
+					</view>
+			</view>
+			</block>
+		</block>
+</template>
+
+<template name="huxingList">
+	<view class="margin-left margin-right padding-top-sm padding-bottom-sm bg-white text-black">
+		<swiper class="" style="width: 100%;height: 540rpx;" next-margin="10px">
+			<block wx:for="{{data}}">
+				<swiper-item>
+					<view class="margin-xs" style="width: 90%;height: 520rpx;box-shadow:0 0 2px 0px #aaa;" data-url="huxing"
+						data-idx="{{index}}"  data-id="{{id}}" bindtap="navigatePage">
+						<view class="flex solid-bottom">
+							<image style="width: 100%;height: 370rpx;margin:auto;" src="{{baseMediaUrl+item.huxingtu[0].image}}"
+								mode="aspectFill"></image>
+						</view>
+						<view class="margin">
+							<view class="flex">
+								<view class="flex-sub text-bold">{{item.huxingmingcheng}}
+								</view>
+								<view class="flex-sub text-gray text-right">
+								</view>
+							</view>
+							<view class="flex padding-top-sm">
+								<view class="flex-sub text-gray">户型面积约<text class="text-black">{{item.jianzhumianji}}㎡</text>
+								</view>
+								<view class="flex-sub text-gray text-right">
+									户型朝向<text class="text-black">{{item.huxingchaoxiang}}</text>
+								</view>
+							</view>
+							<view class="flex">
+								<view class="flex-sub text-gray">
+								</view>
+							</view>
+						</view>
+					</view>
+				</swiper-item>
+			</block>
+		</swiper>
+
+	</view>
+</template>
+
+<template name="projectList">
+	<block wx:for="{{data}}">
+		<navigator hover-class="none" open-type="navigate" url="/pages/project/project?id={{item.id}}">
+			<view class="margin-left-xl margin-right-xl padding-top padding-bottom bg-white text-black solid-bottom">
+				<view class="flex">
+					<view class="flex-sub margin-right-xs">
+						<image class="radius" style="width:335rpx;height:228rpx;border-radius: 25rpx;"
+							src="{{baseUrl+'storage/app/media/'+item.featured_images[0].image}}" mode="aspectFill"></image>
+					</view>
+					<view class="flex-sub margin-left-sm">
+						<view class="text-bold"
+							style="font-size:32rpx;font-weight:bold;line-height:38rpx;height:38rpx;text-overflow: ellipsis;overflow: hidden;">
+							{{item.title}}</view>
+						<view class="text-gray" style="font-size:26rpx;line-height:39rpx;height:39rpx;">
+							{{item.metadata[0].projectinfo[0].suozaishi}} | {{item.metadata[0].projectinfo[0].suozaiqu}}</view>
+						<view class="text-red text-bold" style="font-size:38rpx;line-height:38rpx;height:38rpx;">
+							{{item.metadata[0].projectinfo[0].junjia}}</view>
+						<view class="text-gray" style="font-size:26rpx;line-height:39rpx;height:39rpx;">均价约（元/平）</view>
+						<view class="text-gray" style="font-size:26rpx;line-height:42rpx;height:36rpx;">
+							<block wx:for="{{item.metadata[0].tags}}" wx:for-index="tagidx" wx:for-item="tagitem">
+							<block wx:if="{{tagidx==0||tagidx==1}}">
+								<view class="cu-tag sm radius">{{tagitem.tag}}</view>
+							
+							</block>
+							</block>
+						</view>
+						<view class="text-gray" style="font-size:26rpx;line-height:42rpx;height:36rpx;">
+							<block wx:for="{{item.metadata[0].tags}}" wx:for-index="tagidx" wx:for-item="tagitem">
+							<block wx:if="{{tagidx==2||tagidx==3}}">
+								<view class="cu-tag sm radius">{{tagitem.tag}}</view>
+							
+							</block>
+							</block>
+						</view>
+					</view>
+				</view>
+			</view>
+		</navigator>
+	</block>
+</template>
+
+<template name="shetuanList">
+	<block wx:for="{{data}}">
+		<navigator hover-class="none" open-type="navigate" url="/pages/project/project?id={{item.id}}">
+			<view class="margin-left-xl margin-right-xl padding-top padding-bottom bg-white text-black solid-bottom">
+				<view class="flex">
+					<view class="flex-sub margin-right">
+						<image class="radius" style="width:120rpx;height:120rpx;border-radius: 25rpx;"
+							src="{{baseMediaUrl+item.featured_images[0].image}}" mode="aspectFill"></image>
+					</view>
+					<view class="flex-treble">
+						<view class="text-bold"
+							style="font-size:32rpx;font-weight:bold;line-height:38rpx;height:38rpx;text-overflow: ellipsis;overflow: hidden;margin-top:25rpx;">
+							{{item.title}}</view>
+						<view class="text-gray" style="font-size:26rpx;line-height:39rpx;height:39rpx;">{{item.slug}}</view>
+						<!--<view class="text-gray" style="font-size:24rpx;line-height:39rpx;height:39rpx;">成立时间：{{utils.convertDatetoYear(item.metadata[0].chenglishijian)}}</view>
+						<view class="text-gray" style="font-size:24rpx;line-height:39rpx;height:39rpx;">隶属机构：{{item.metadata[0].lishujigou}}</view>
+						<view class="text-gray" style="font-size:26rpx;line-height:42rpx;height:36rpx;">
+							<block wx:for="{{item.metadata[0].tags}}" wx:for-index="tagidx" wx:for-item="tagitem">
+							<block wx:if="{{tagidx==0||tagidx==1||tagidx==2}}">
+								<view class="cu-tag sm radius bg-blue">{{tagitem.tag}}</view>
+							</block>
+							</block>
+						</view>-->
+					</view>
+					<view class="flex-sub text-center text-gray" style="margin-top:10rpx;">
+						<view>
+							<image style="width:40rpx;height:40rpx;" src="/img/heart-icon-u.png"></image>
+						</view>
+						<view style="font-size:24rpx;">{{item.heartcount}}</view>
+					</view>
+				</view>
+			</view>
+		</navigator>
+	</block>
+</template>
+
+<template name="buttonList">
+	<block wx:for="{{data}}">
+		<block wx:if="{{item.type=='opentype'}}">
+			<button class="text-df"
+				style="border:none;outline:noneoutline;width: 100%;padding: 0;background:#fff;font-weight:normal;line-height:35px;text-align: left;"
+				open-type="{{item.opentype}}" bindgetphonenumber="{{item.bindgetphonenumber}}" bindtap="{{item.function}}">
+
+				<view class="margin-left-xl margin-right-xl bg-white text-black solid-bottom">
+					<view class="flex">
+						<view class="flex-sub margin-sm">
+							<view style="width:50rpx;height:50rpx;line-height:105rpx;">
+								<image style="width:50rpx;height:50rpx;" src="{{item.icon}}"></image>
+							</view>
+						</view>
+						<view class="flex-treble margin-sm" style="line-height:70rpx;margin-left: 0;">
+							{{item.title}}
+						</view>
+						<view class="flex-treble margin-sm text-right" style="line-height:70rpx;">
+							>
+						</view>
+					</view>
+				</view>
+			</button>
+		</block>
+		<block wx:else="{{item.type=='navigator'}}">
+			<navigator hover-class="none" url="{{item.path}}">
+
+				<view class="text-df margin-left-xl margin-right-xl bg-white text-black solid-bottom">
+					<view class="flex">
+						<view class="flex-sub margin-sm">
+							<view style="width:50rpx;height:50rpx;line-height:105rpx;">
+								<image style="width:50rpx;height:50rpx;" src="{{item.icon}}"></image>
+							</view>
+						</view>
+						<view class="flex-treble margin-sm" style="line-height:70rpx;margin-left: 0;">
+							{{item.title}}
+						</view>
+						<view class="flex-treble margin-sm text-right" style="line-height:70rpx;">
+							>
+						</view>
+					</view>
+				</view>
+			</navigator>
+		</block>
+	</block>
+</template>
+
+<template name="adviserList">
+	<block wx:for="{{data}}">
+		<block wx:if="{{limit!=null?(index<limit):true}}">
+		<view class="margin-left-xs margin-right-xs bg-white text-black padding-top-xs padding-bottom-xs solid-bottom">
+			<view class="flex" style="height:124rpx;">
+				<view class="flex-sub margin-sm">
+					<view style="width:86rpx;height:86rpx;">
+						<image style="width:86rpx;height:86rpx;border-radius: 50rpx;"
+							src="{{baseMediaUrl+item.metadata[0].adviseravatar}}"></image>
+					</view>
+				</view>
+				<view class="flex-treble margin-sm text-bold" style="line-height:90rpx;">
+					{{item.title}}
+				</view>
+				<view class="flex-twice margin-sm text-right">
+					<view class="flex">
+						<view class="flex-sub" style="margin-top:8rpx;">
+							<view style="width:70rpx;height:70rpx; text-right"
+								data-qrcode="{{baseMediaUrl+item.metadata[0].adviserqrcode}}" bindtap="previewqrcode">
+								<image style="width:70rpx;height:70rpx;" src="/img/card.png"></image>
+							</view>
+						</view>
+						<view class="flex-sub" style="margin-top:8rpx;">
+							<view style="width:70rpx;height:70rpx; text-right" data-phone="{{item.metadata[0].adviserphone}}"
+								bindtap="callphone">
+								<image style="width:70rpx;height:70rpx;" src="/img/call.png"></image>
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
+		</view>
+	</block>
+	</block>
+</template>
+
+
+<template name="bumenList">
+	<view class="margin-left margin-right padding-top-sm padding-bottom-sm bg-white text-black">
+		<swiper class="" style="width: 100%;height: 180rpx;" next-margin="30px" display-multiple-items="2">
+			<block wx:for="{{data}}">
+				<swiper-item>
+					<view class="margin-xs" style="width: 240rpx;height: 160rpx;box-shadow:0 0 2px 0px #aaa;" data-url="bumen"
+						data-idx="{{index}}"  data-id="{{item.department}}">
+						<view class="flex" style="height: 160rpx;">
+							<image style="width: 100%;height: 160rpx;margin:auto;" src="{{baseMediaUrl+item.featured_images[0].image}}"
+								mode="aspectFill"></image>
+								<view class="text-bold" style="position:absolute;bottom:20rpx;padding-left:20rpx;font-size:26rpx;width: 80%;">{{item.departmentslug}}</view>
+						</view>
+					</view>
+				</swiper-item>
+			</block>
+			<block wx:if="{{utils.count(data)<2}}">
+				<block wx:for="{{utils.createArray(2-utils.count(data))}}">
+					<swiper-item>
+						<view class="margin-xs" style="width: 240rpx;height: 160rpx;">
+							<view class="flex">
+								<image style="width: 100%;height: 160rpx;margin:auto;" src=""
+									mode="aspectFill"></image>
+									<view class="text-bold" style="position:absolute;bottom:20rpx;padding-left:20rpx;"></view>
+							</view>
+						</view>
+					</swiper-item>
+				</block>
+			</block>
+		</swiper>
+	</view>
+</template>
+
+
+<template name="lianxiList">
+	<view class="margin-left margin-right padding-top-sm padding-bottom-sm bg-white text-black">
+		<swiper class="" style="width: 100%;height: 140rpx;" next-margin="20px" display-multiple-items="4">
+			<block wx:for="{{data}}">
+				<swiper-item>
+					<view class="margin-xs" style="width:100rpx;height: 100rpx;" data-qrcodetext="{{item.qrcodetext}}" data-url="{{item.qrcode}}" bindtap="showqrcode">
+							<image style="width: 100rpx;height: 100rpx;margin:auto;" src="/img/lx-{{item.contact}}.png" mode="aspectFit"></image>
+					</view>
+				</swiper-item>
+			</block>
+			<block wx:if="{{utils.count(data)<4}}" wx:for="{{utils.createArray(4-utils.count(data))}}">
+				<swiper-item>
+					<view class="margin-xs" style="width:100rpx;height: 100rpx;">
+							<image style="width: 100rpx;height: 100rpx;margin:auto;" src="" mode="aspectFit"></image>
+					</view>
+				</swiper-item>
+			</block>
+		</swiper>
+	</view>
+</template>
+
+<template name="searchList">
+	<block wx:for="{{data}}">
+		<block wx:if="{{limit!=null?(index<limit):true}}">
+			<view class="margin-left margin-right padding-top-sm padding-bottom-sm bg-white text-black solid-bottom" data-url="{{item.url?item.url:'/pages/news/news'}}" data-id="{{item.id+''}}" bindtap="navigatePage">
+				<view class="" style="width:100%;height:180rpx;">
+					<view class="" style="float:left;width: 57%;">
+						<view
+							style="font-size:30rpx;font-weight:bold;line-height:42rpx;height:126rpx;text-overflow: ellipsis;overflow: hidden;">
+							{{item.title}}</view>
+						<view class="text-gray" style="font-size:26rpx;line-height:81rpx;height:54rpx;">{{utils.convertNumToString(item.viewcount||1)}} 阅读</view>
+					</view>
+					<view class="margin-left-xs" style="float: right;width: 40%;">
+						<image class="radius" style="width:100%;height:180rpx;border-radius:10rpx;"
+							src="{{utils.count(item.featured_images)>0?baseMediaUrl+item.featured_images[0].image:''}}" mode="aspectFit"></image>
+					</view>
+				</view>
+			</view>
+	</block>
+	</block>
+</template>
+
+
+<template name="albumList">
+	<view class="margin-left margin-right padding-top-sm padding-bottom-sm text-black">
+		<swiper class="" style="width: 100%;height: 340rpx;" display-multiple-items="2">
+			<block wx:for="{{data}}">
+				<swiper-item>
+					<view class="margin-xs" style="width:300rpx;height: 300rpx;" data-url="/pages/util/albumlist" data-albumid="{{item.id+''}}" bindtap="navigatePage">
+							<image style="width: 300rpx;height: 300rpx;margin:auto;border-radius:15rpx;" src="{{baseMediaUrl+item.featured_images[0].image}}" mode="aspectFit"></image>
+					</view>
+				</swiper-item>
+			</block>
+			<block wx:if="{{utils.count(data)<2}}" wx:for="{{utils.createArray(2-utils.count(data))}}">
+				<swiper-item>
+					<view class="margin-xs" style="width:100rpx;height: 100rpx;">
+							<image style="width: 100rpx;height: 100rpx;margin:auto;" src="" mode="aspectFit"></image>
+					</view>
+				</swiper-item>
+			</block>
+		</swiper>
+	</view>
+</template>

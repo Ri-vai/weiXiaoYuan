@@ -1,0 +1,25 @@
+<template name="header">
+<view class="padding-sm text-center text-lg text-bold" style="padding-top:{{headerbutton.top!=null?headerbutton.top+2:50}}px;opacity:{{opacity!=null?opacity:1}};background-color:rgba({{bgcolor!=null?bgcolor:'255,255,255'}},{{bgopacity!=null?bgopacity:1}});position: fixed;width: 100%;z-index: 9999;top: 0;color:{{color}};">
+<view class="text-left" style="width:{{headerbutton.top!=null?headerbutton.width:60}}px;font-weight:normal;font-size:60rpx;line-height: 30rpx;">
+  <block wx:if="{{needback&&needhome}}">
+  <view class="text-center" style="width:50%;float:left;background: #00000030;border-top-left-radius: 50px;border-bottom-left-radius: 50px;height: {{headerbutton.height!=null?headerbutton.height-1:32}}px;line-height: {{headerbutton.height!=null?headerbutton.height-6:32}}px;border: 1px solid #ffffff70;border-style: solid none solid solid;" data-type="back" bindtap="navigateback">
+  <image src="/img/goback{{color=='black'?'-b':''}}.png" style="width:35rpx;height:35rpx;"></image>
+  
+  </view>
+  <view class="text-center" style="width:50%;float: left;background: #00000030;border-top-right-radius: 50px;border-bottom-right-radius: 50px;height: {{headerbutton.height!=null?headerbutton.height-1:32}}px;line-height: {{headerbutton.height!=null?headerbutton.height-6:32}}px;border: 1px solid #ffffff70;" data-type="home" bindtap="navigateback">
+  <image src="/img/gohome{{color=='black'?'-b':''}}.png" style="width:35rpx;height:35rpx;"></image>
+  
+  </view>
+  </block>
+  <block wx:elif="{{needback&&!needhome}}">
+  
+  <view class="text-center" style="width:50%;float:left;height: {{headerbutton.height!=null?headerbutton.height-1:32}}px;line-height: {{headerbutton.height!=null?headerbutton.height-6:32}}px;" data-type="back" bindtap="navigateback">
+  <image src="/img/goback{{color=='black'?'-b':''}}.png" style="width:35rpx;height:35rpx;"></image>
+  
+  </view>
+  </block>
+</view>
+<view class="" style="width:40%;margin:auto;line-height:{{headerbutton.height!=null?headerbutton.height:32}}px;opacity:{{titleOpacity!=null?titleOpacity:1}};">{{data}}</view>
+<view class="" style="width:{{headerbutton.top!=null?headerbutton.width:60}}px;"></view>
+</view>
+</template>

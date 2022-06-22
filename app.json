@@ -1,0 +1,40 @@
+{
+  "pages": [
+    "pages/index/work",
+    "pages/index/index",
+    "pages/index/my"
+    
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "backgroundTextStyle": "dark",
+    "navigationStyle": "custom",
+    "pageOrientation": "portrait"
+  },
+  "tabBar": {
+    "custom": true,
+    "color": "#000000",
+    "selectedColor": "#b5001f",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "主页"
+      },
+      {
+        "pagePath": "pages/index/work",
+        "text": "办事"
+      },
+      {
+        "pagePath": "pages/index/my",
+        "text": "我的"
+      }
+    ]
+  },
+  "usingComponents": {
+    "tabBar": "custom-tab-bar/index"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

@@ -1,0 +1,245 @@
+<template name="banner">
+  <view class="flex padding padding-left-xs padding-right-xs">
+    <swiper class="radius" style="width: 100%;height: 370rpx;" indicator-dots autoplay circular>
+      <block wx:for="{{data}}">
+        <block wx:for="{{item.featured_images}}" wx:for-index="fidx" wx:for-item="fitem">
+          <swiper-item style="">
+            <image style="width: 95%;height: 350rpx;margin:10rpx 2.5%;border-radius: 25rpx;box-shadow:0px 0px 5px 0px #ccc;" src="{{baseMediaUrl+fitem.image}}" mode="aspectFill" data-id="{{item.metadata[0].lianjiexiangmu}}" data-url="/pages/project/project" bindtap="navigatePage"></image>
+          </swiper-item>
+        </block>
+      </block>
+    </swiper>
+  </view>
+</template>
+
+<template name="profilebanner">
+  <view class="flex padding-xs">
+    <view class="radius padding" style="width: 95%;height: 370rpx;margin:10rpx 2.5%;border-radius: 25rpx;box-shadow:0px 0px 5px 0px #ccc;">
+      <view class="flex" style="height:160rpx;">
+        <view class="flex-sub">
+          <image style="width:614rpx;height:140rpx;" src="{{baseMediaUrl+data.featured_images[0].image}}" mode="aspectFit"></image>
+        </view>
+      </view>
+      <view class="flex" style="height:52rpx;font-size: 26rpx;">
+        <view class="flex-sub">办学性质：<text class="text-bold">{{data.metadata[0].banxuexingzhi}}</text></view>
+        <view class="flex-sub">国际代码：<text class="text-bold">{{data.metadata[0].guojidaima}}</text></view></view>
+      <view class="flex" style="height:52rpx;font-size: 26rpx;">
+        <view class="flex-sub">办学类型：<text class="text-bold">{{data.metadata[0].banxueleixing}}</text></view>
+        <view class="flex-sub">学校地址：<text class="text-bold">{{data.metadata[0].xuexiaodizhi}}</text></view></view>
+      <view class="flex" style="height:50rpx;padding-top:10rpx;">
+        <block wx:for="{{data.metadata[0].tags}}">
+          <view class="flex-sub">
+          <view class="cu-tag bg-blue" style="height:32rpx;font-size:20rpx;border-radius:6rpx;width: 98%;padding: 0rpx 4rpx;">{{item.tag}}</view>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+</template>
+
+<template name="iconbanner">
+  <view class="flex padding-xs padding-bottom">
+    <view class="padding-left padding-right text-center text-sm" style="width: 95%;margin:10rpx 2.5%;">
+      <view class="flex">
+        <view class="flex-sub" data-url="/pages/index/rsgy" data-id="9" bindtap="navigatePage">
+          <view>
+          <image style="width:100rpx;height:100rpx;" src="/img/index-rsgy.png"></image>
+          </view>
+          <view>认识广以</view>
+        </view>
+        <view class="flex-sub" data-url="/pages/util/webview" data-id="10" bindtap="navigatePage">
+          <view>
+          <image style="width:100rpx;height:100rpx;" src="/img/index-yyxy.png"></image>
+          </view>
+          <view>云游校园</view>
+        </view>
+        <view class="flex-sub" data-url="/pages/guangying/index" bindtap="navigatePage">
+          <view>
+          <image style="width:100rpx;height:100rpx;" src="/img/index-gyxy.png"></image>
+          </view>
+          <view>光影校园</view>
+        </view>
+        <view class="flex-sub" data-url="/pages/index/bkzs" data-id="11" bindtap="navigatePage">
+          <view>
+          <image style="width:100rpx;height:100rpx;" src="/img/index-bkzs.png"></image>
+          </view>
+          <view>本科招生</view>
+        </view>
+      </view>
+      <view class="flex padding-top-lg">
+        <view class="flex-sub" data-url="/pages/news/newsnoheader" data-id="12" bindtap="navigatePage">
+          <view>
+          <image style="width:100rpx;height:100rpx;" src="/img/index-dysq.png"></image>
+          </view>
+          <view>读研申请</view>
+        </view>
+        <view class="flex-sub" data-url="/pages/shetuan/index" bindtap="navigatePage">
+          <view>
+          <image style="width:100rpx;height:100rpx;" src="/img/index-dcst.png"></image>
+          </view>
+          <view>多彩社团</view>
+        </view>
+        <view class="flex-sub" data-url="/pages/util/webview" data-id="13" bindtap="attention">
+          <view>
+          <image style="width:100rpx;height:100rpx;" src="/img/index-yycg.png"></image>
+          </view>
+          <view>预约参观</view>
+        </view>
+        <view class="flex-sub" data-url="/pages/index/contactus" data-id="8" bindtap="navigatePage">
+          <view>
+          <image style="width:100rpx;height:100rpx;" src="/img/index-lxwm.png"></image>
+          </view>
+          <view>联系我们</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>
+
+<template name="imageBanner4">
+  <view class="flex padding text-white">
+    <view class='flex-sub bg-white margin-xs' style="margin-left:0;">
+      <view class="padding-xs padding-left-sm text-white" style="border-radius: 10rpx;background: #b5001f;">热销楼盘</view>
+      <block wx:for="{{data}}" wx:for-index="idx" wx:for-item="item">
+        <block wx:if="{{idx==0}}">
+          <navigator hover-class="none" open-type="navigate" url="/pages/project/project?id={{item.id}}">
+            <view class="padding-sm margin-top-sm text-white"
+              style="width: 100%;height: 320rpx;background: #b5001f;border-radius: 10rpx;background:url('{{baseMediaUrl+item.featured_images[0].image}}');background-size: cover;">
+              {{item.title}}</view>
+          </navigator>
+        </block>
+      </block>
+    </view>
+    <view class='flex-twice bg-white margin-xs radius'>
+      <block wx:for="{{data}}" wx:for-index="idx" wx:for-item="item">
+        <block wx:if="{{idx==1}}">
+          <navigator hover-class="none" open-type="navigate" url="/pages/project/project?id={{item.id}}">
+            <view class="yuejiang-sea padding-sm text-white"
+              style="width: 100%;height: 200rpx;background: #b5001f;border-radius: 10rpx;background:url('{{baseMediaUrl+item.featured_images[0].image}}');background-size: cover;">
+              {{item.title}}</view>
+          </navigator>
+        </block>
+      </block>
+      <view class="sub-banner margin-top-sm">
+        <view class="flex">
+          <block wx:for="{{data}}" wx:for-index="idx" wx:for-item="item">
+            <block wx:if="{{idx==2}}">
+              <navigator hover-class="none" open-type="navigate" url="/pages/project/project?id={{item.id}}">
+                <view class='city flex-sub bg-grey padding-sm radius margin-right-sm text-white'
+                  style="width: 100%;height: 180rpx;background: #b5001f;border-radius: 10rpx;background:url('{{baseMediaUrl+item.featured_images[0].image}}');background-size: cover;">
+                  {{item.title}}</view>
+              </navigator>
+            </block>
+            <block wx:if="{{idx==3}}">
+              <navigator hover-class="none" open-type="navigate" url="/pages/project/project?id={{item.id}}">
+                <view class='shangdong flex-sub bg-grey padding-sm radius text-white'
+                  style="width: 100%;height: 180rpx;background: #b5001f;border-radius: 10rpx;background:url('{{baseMediaUrl+item.featured_images[0].image}}');background-size: cover;">
+                  {{item.title}}</view>
+              </navigator>
+            </block>
+          </block>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>
+<template name="imageBanner3">
+  <view class="flex padding">
+    <view class='flex-sub bg-white margin-xs' style="margin-left:0;">
+      <view class="hot-sale padding-xs padding-left-sm text-white" style="border-radius: 10rpx;background: #b5001f;">
+        特色楼盘</view>
+      <block wx:for="{{data}}" wx:for-index="idx" wx:for-item="item">
+        <block wx:if="{{idx==0}}">
+          <navigator hover-class="none" open-type="navigate" url="/pages/project/project?id={{item.id}}">
+            <view class="tanfu padding-sm margin-top-sm text-white"
+              style="width: 100%;height: 320rpx;background: #b5001f;border-radius: 10rpx;background:url('{{baseMediaUrl+item.featured_images[0].image}}');background-size: cover;">
+              {{item.title}}</view>
+          </navigator>
+        </block>
+      </block>
+    </view>
+    <view class='flex-twice bg-white margin-xs'>
+      <block wx:for="{{data}}" wx:for-index="idx" wx:for-item="item">
+        <block wx:if="{{idx==1}}">
+          <navigator hover-class="none" open-type="navigate" url="/pages/project/project?id={{item.id}}">
+            <view class="yuejiang-sea padding-sm text-white"
+              style="width: 100%;height: 190rpx;background: #b5001f;border-radius: 10rpx;background:url('{{baseMediaUrl+item.featured_images[0].image}}');background-size: cover;">
+              {{item.title}}</view>
+          </navigator>
+        </block>
+        <block wx:if="{{idx==2}}">
+          <navigator hover-class="none" open-type="navigate" url="/pages/project/project?id={{item.id}}">
+            <view class="tanjing padding-sm margin-top-sm text-white"
+              style="width: 100%;height: 190rpx;background: #b5001f;border-radius: 10rpx;background:url('{{baseMediaUrl+item.featured_images[0].image}}');background-size: cover;">
+              {{item.title}}</view>
+          </navigator>
+        </block>
+      </block>
+    </view>
+  </view>
+</template>
+
+<template name="imageBanner4-1">
+<view class="padding">
+  <view class="flex">
+    <view class='flex-twice bg-white margin-right-xs' style="margin-left:0;">
+      <view class="hot-sale padding-xs padding-left-sm text-white" style="border-radius: 10rpx;background: #b5001f;">
+        特色楼盘</view>
+      <block wx:for="{{data}}" wx:for-index="idx" wx:for-item="item">
+        <block wx:if="{{idx==0}}">
+          <navigator hover-class="none" open-type="navigate" url="/pages/project/project?id={{item.id}}">
+            <view class="tanfu padding-sm margin-top-sm text-white"
+              style="width: 100%;height: 320rpx;background: #b5001f;border-radius: 10rpx;background:url('{{baseMediaUrl+item.featured_images[0].image}}');background-size: cover;background-position: center;">
+              {{item.title}}</view>
+          </navigator>
+        </block>
+      </block>
+    </view>
+    <view class='flex-treble bg-white margin-left-xs'>
+      <block wx:for="{{data}}" wx:for-index="idx" wx:for-item="item">
+        <block wx:if="{{idx==1}}">
+          <navigator hover-class="none" open-type="navigate" url="/pages/project/project?id={{item.id}}">
+            <view class="yuejiang-sea padding-sm text-white"
+              style="width: 100%;height: 190rpx;background: #b5001f;border-radius: 10rpx;background:url('{{baseMediaUrl+item.featured_images[0].image}}');background-size: cover;background-position: center;">
+              {{item.title}}</view>
+          </navigator>
+        </block>
+        <block wx:if="{{idx==2}}">
+          <navigator hover-class="none" open-type="navigate" url="/pages/project/project?id={{item.id}}">
+            <view class="tanjing padding-sm margin-top-sm text-white"
+              style="width: 100%;height: 190rpx;background: #b5001f;border-radius: 10rpx;background:url('{{baseMediaUrl+item.featured_images[0].image}}');background-size: cover;background-position: center;">
+              {{item.title}}</view>
+          </navigator>
+        </block>
+      </block>
+    </view>
+  </view>
+  <view class="flex">
+  <view class="flex-sub">
+      <block wx:for="{{data}}" wx:for-index="idx" wx:for-item="item">
+        <block wx:if="{{idx==3}}">
+          <navigator hover-class="none" open-type="navigate" url="/pages/project/project?id={{item.id}}">
+            <view class="tanfu padding-sm margin-top-sm text-white"
+              style="width: 100%;height: 230rpx;background: #b5001f;border-radius: 10rpx;background:url('{{baseMediaUrl+item.featured_images[0].image}}');background-size: cover;background-position: center;">
+              {{item.title}}</view>
+          </navigator>
+        </block>
+      </block>
+      </view>
+  </view>
+</view>
+</template>
+
+<template name="imageBanner1">
+<view class="padding padding-top-xs">
+      <block wx:for="{{data}}" wx:for-index="idx" wx:for-item="item">
+        <block wx:if="{{idx==0}}">
+          <navigator hover-class="none" open-type="navigate" url="/pages/project/project?id={{item.id}}">
+            <view class="tanfu padding-sm margin-top-sm text-white"
+              style="width: 100%;height: 320rpx;background: #b5001f;border-radius: 10rpx;background:url('{{baseMediaUrl+item.featured_images[0].image}}');background-size: cover;">
+              {{item.title}}</view>
+          </navigator>
+        </block>
+      </block>
+</view>
+</template>

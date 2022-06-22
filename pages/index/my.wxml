@@ -1,0 +1,45 @@
+
+<view class="bg-img">
+  <image src="/img/mybg.jpg" style="width:100%;height:75vw;" mode="aspectFill"></image>
+  <block wx:if="{{userInfo.userid!=null&&userInfo.userid!=undefined&&userInfo.userid!=''}}">
+		<view class="cu-card case" style="position: absolute;top: 190rpx;width: 100%;">
+			<view class="cu-item">
+				<view class="cu-list menu-avatar">
+					<view class="cu-item">
+						<view class="cu-avatar round lg" style="background-image:url({{userInfo.avatarUrl}});"></view>
+						<view class="content" style="margin-left: 20px;">
+							<view class="text-white text-xl text-bold">{{userInfo.nickName}}</view>
+							<view class="text-white text-lg flex justify-between">
+								{{userInfo.phonenumber}}
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
+		</view>
+  </block>
+  <block wx:else>
+		<view class="cu-card case" style="position: absolute;top: 160rpx;width: 100%;">
+			<view class="cu-item">
+				<view class="cu-list menu-avatar">
+					<view class="cu-item" style="padding-left: 0;">
+						<view class="content flex-sub" style="width: 100%;left: 0;">
+							<view></view>
+							<view>
+								<view class="text-center text-white text-xl"></view>
+  							<button class="text-white text-xl" style="background-color: #00000000;width:100%;" open-type="getUserInfo" bindgetuserinfo="login">请点击登录</button>
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
+  </view>
+  </block>
+</view>
+<view class="container padding-top-lg">
+<import src="/template/list.wxml"/>
+<template is="buttonList" data="{{data: buttonList}}"/>
+<view class="padding padding-top-lg text-center" style="width:100%;">
+<image src="" style="width:40%;height:100rpx;margin:auto;" mode="aspectFit"></image>
+</view>
+</view>

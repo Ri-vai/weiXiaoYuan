@@ -1,0 +1,36 @@
+<!--index.wxml-->
+<import src="/template/header.wxml" />
+<import src="/template/search.wxml" />
+<import src="/template/banner.wxml" />
+<import src="/template/title.wxml" />
+<import src="/template/list.wxml" />
+<view style="z-index:999;position: absolute;top: 0;width: 100%;height: 80rpx;opacity:{{headeropacity}};backgorund:rgba(0,0,0,0);visibility:{{headeropacity<0.1?'hidden':'visible'}}" wx:hidden="{{headeropacity<0.1?true:false}}">
+	<template is="header" data="{{data: '广以小程序',opacity:headeropacity,headerbutton:headerbutton,color:'white',bgcolor:'186,50,26'}}" />
+</view>
+	<view class="bg-img">
+		<swiper style="height: 75vw;width: 100vw;" autoplay circular interval="4000">
+			<block wx:for="{{indexbg}}">
+				<block wx:for="{{item.featured_images}}">
+					<block wx:if="{{item.image!=''}}">
+						<swiper-item style="height: 75vw;width: 100vw;" data-url="{{item.path}}" bindtap="navigatePage">
+							<image style="height: 75vw;width: 100vw;" src="{{indexbg!=null?baseMediaUrl+item.image:''}}" mode="aspectFill"></image>
+						</swiper-item>
+					</block>
+				</block>
+			</block>
+		</swiper>
+		<view style="position:absolute;top:400rpx;width: 100%;">
+			<template is="search" data="{{data: teseloupan,baseMediaUrl:baseMediaUrl}}" />
+		</view>
+	</view>
+	<view class="container padding-xs padding-top-sm" bindtouchstart="scroll" bindtouchmove="scroll" bindtouchend="scroll">
+		<template is="profilebanner" data="{{data: xuexiaogaikuang[0],baseMediaUrl:baseMediaUrl}}" class="padding-bottom-sm"/>
+		<template is="iconbanner" data="{{data: teseloupan,baseMediaUrl:baseMediaUrl}}" />
+	<template is="divider" />
+		<template is="listTitle" data="{{title: '新闻资讯',path:'/pages/news/newslist'}}" />
+		<template is="newsList" data="{{data: toutiaoxinwen,baseMediaUrl:baseMediaUrl,limit:3}}" />
+	</view>
+	<view style="width:100%;height:170rpx;background-color:#fff;"></view>
+<import src="/template/modal.wxml" />
+<!--<template is="loginmodal" data="{{modalName: modalName}}" />-->
+<template is="attentionmodal" data="{{modalName: modalName,baseMediaUrl:baseMediaUrl}}" />

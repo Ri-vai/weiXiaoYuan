@@ -1,0 +1,21 @@
+<template name="listTitle">
+	<view class="margin-left margin-right padding-top padding-bottom-sm bg-white text-black">
+		<view class="flex">
+			<view class="flex-treble">
+				<view style="font-size:34rpx;font-weight:bold;line-height:34rpx;height:34rpx;">{{title}}</view>
+			</view>
+			<block wx:if="{{path}}">
+				<navigator hover-class="none" url="{{path}}" open-type="navigate">
+					<view class="flex-sub">
+						<view class="text-gray text-right" style="font-size:26rpx;line-height:38rpx;height:34rpx;">查看全部 ></view>
+					</view>
+				</navigator>
+			</block>
+		</view>
+	</view>
+</template>
+
+<template name="divider">
+	<view class="margin-bottom-xs" style="width:100%;height:10px;background:#eee;">
+	</view>
+</template>

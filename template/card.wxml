@@ -1,0 +1,279 @@
+<wxs src="utils.wxs" module="utils" />
+
+<template name="projectCard">
+	<view class="margin-left-sm margin-right-sm padding-top-sm padding-bottom-sm bg-white text-black">
+		<view class="flex">
+			<view class="flex-12 margin-right-sm">
+				<view class="text-bold" style="font-size:48rpx;font-weight:bold;line-height:72rpx;height:72rpx;text-overflow: ellipsis;overflow: hidden;">{{data.title}}</view>
+				<view class="text-gray padding-bottom-xs" style="font-size:26rpx;line-height:42rpx;">
+					<block wx:for="{{data.metadata[0].tags}}" wx:for-index="tagidx" wx:for-item="tagitem">
+						<view class="cu-tag sm radius bg-red" style="{{tagidx%4==0?'margin-left:0;':''}}">{{tagitem.tag}}</view>
+					</block>
+				</view>
+				<!--<view class="text-gray" style="font-size:26rpx;line-height:52rpx;height:72rpx;">
+					<view>
+						<view class="cu-tag sm radius">低密住宅</view>
+						<view class="cu-tag sm radius">4A景区旁</view>
+					</view>
+				</view>-->
+				<view class="text-red text-bold" style="font-size:38rpx;line-height:56rpx;height:56rpx;">{{data.metadata[0].projectinfo[0].junjia}}</view>
+				<view class="text-gray" style="font-size:26rpx;line-height:42rpx;height:42rpx;">均价约（元/平）</view>
+			</view>
+			<view class="flex-sub margin-sm margin-right-xs text-center" style="margin-top:0;" bindtap="requestMsg">
+				<image class="radius" style="width:40rpx;height:40rpx;" src="/img/notice.png" mode="aspectFill"></image>
+				<view class="text-red text-bold" style="font-size:20rpx;line-height:39rpx;height:39rpx;">订阅</view>
+			</view>
+		</view>
+		<view class="flex">
+			<view class="flex-12 margin-right-sm">
+				<view class="" style="font-size:26rpx;line-height:40rpx;">
+					<view class="" style="width:80rpx;float:left;">地址：</view><view class="" style="width:414rpx;float:left;">{{data.metadata[0].projectinfo[0].loupandizhi}}</view>
+				</view>
+			</view>
+			<view class="flex-sub margin-sm text-center" style="margin-top:0;margin-right:0;" bindtap="openlocation">
+				<image class="radius" style="width:70rpx;height:70rpx;border-radius:50px;" src="/img/map.png" mode="aspectFill"></image>
+			</view>
+		</view>
+		<view class="padding-xs text-center bg-gray margin-top-sm" style="border-radius:50px;line-height:50rpx;" data-url="xiangqing" data-id="{{data.id}}" bindtap="navigatePage">
+			查看详情
+		</view>
+	</view>
+</template>
+
+
+<template name="shetuanCard">
+	<view class="margin-left-sm margin-right-sm padding-top-sm padding-bottom-sm bg-white text-black">
+		<view class="flex">
+			<view class="flex-12 margin-right-sm">
+				<view class="text-bold" style="font-size:48rpx;font-weight:bold;line-height:72rpx;height:72rpx;text-overflow: ellipsis;overflow: hidden;">{{data.title}}</view>
+				<view class="text-gray padding-bottom-xs" style="font-size:26rpx;line-height:42rpx;">
+					<block wx:for="{{data.metadata[0].tags}}" wx:for-index="tagidx" wx:for-item="tagitem">
+						<view class="cu-tag sm radius bg-red" style="{{tagidx%4==0?'margin-left:0;':''}}">{{tagitem.tag}}</view>
+					</block>
+				</view>
+			</view>
+			<view class="flex-sub margin-sm margin-right-xs text-center" style="margin-top:0;" bindtap="requestMsg">
+				<image class="radius" style="width:40rpx;height:40rpx;" src="/img/heart-icon{{data.heartcheck?'':'-u'}}.png" mode="aspectFill"></image>
+				<view class="text-bold" style="font-size:24rpx;line-height:39rpx;height:39rpx;">{{data.heartcount}}</view>
+			</view>
+		</view>
+		<view class="flex">
+			<view class="flex-sub">
+				<view class="padding-top" style="font-size:26rpx;line-height:42rpx;text-indent:2em;text-align: justify;height:{{showAllcontent?'auto':'230rpx'}};text-overflow: ellipsis;overflow: hidden;">{{data.excerpt}}</view>
+			</view>
+		</view>
+		<!--<view class="padding-xs text-center bg-gray margin-top-sm" style="border-radius:50px;line-height:50rpx;" data-url="xiangqing" data-id="{{data.id}}" bindtap="navigatePage">
+			查看详情
+		</view>-->
+		<view class="padding-xs text-center bg-gray margin-top-sm" style="border-radius:50px;line-height:50rpx;" data-url="xiangqing" data-id="{{data.id}}" bindtap="showcontent">
+			{{showAllcontent?'隐藏详情':'展开详情'}}
+		</view>
+	</view>
+</template>
+
+<template name="huxingCard">
+		<import src="/template/title.wxml" />
+	<view class="margin-left margin-right padding-top padding-bottom-lg bg-white text-black">
+		<swiper class="radius" style="width: 100%;height: 500rpx;" current="{{current}}" indicator-dots autoplay>
+		<block wx:for="{{data.huxing.huxingtu}}">
+			<swiper-item style="">
+				<image style="width: 100%;height: 500rpx;" src="{{baseMediaUrl+item.image}}" data-src="{{baseMediaUrl+item.image}}" mode="aspectFill" bindtap="huxingpreviewImage"></image>
+			</swiper-item>
+			</block>
+		</swiper>
+		<view class="flex margin">
+			<view class="flex-12">
+				<view class="text-bold" style="font-size:48rpx;font-weight:bold;line-height:72rpx;height:72rpx;text-overflow: ellipsis;overflow: hidden;">{{data.huxing.huxingmingcheng}}</view>
+				<view class="text-red text-bold" style="font-size:38rpx;line-height:57rpx;height:57rpx;">{{data.huxing.zongjia=='待定'||data.huxing.zongjia==''?'待定':'约'+data.huxing.zongjia+'万'}}</view>
+				<view class="" style="font-size:26rpx;line-height:42rpx;height:42rpx;">户型面积 <text class="text-bold">约{{data.huxing.jianzhumianji}}㎡</text></view>
+				<view class="" style="font-size:26rpx;line-height:42rpx;height:42rpx;">户型朝向 <text class="text-bold">{{data.huxing.huxingchaoxiang}}</text></view>
+				<view class="" style="font-size:26rpx;line-height:42rpx;height:42rpx;float:left;width:110rpx;">户型亮点</view>
+				<view class="text-bold" style="font-size:26rpx;line-height:42rpx;float:left;width:80%;">
+					{{data.huxing.huxingjieshao}}
+				</view>
+			</view>
+		</view>
+	</view>
+</template>
+
+<template name="activityCard">
+<import src="/template/title.wxml"/>
+<view class="bg-white text-black">
+  <image style="width:100vw;height:{{imageheight!=''?imageheight+'px':'240px'}};" src="{{baseMediaUrl+data.metadata[0].featured_images[0].image}}" mode="aspectFill" bindload="imageload"></image>
+	<view class="padding">
+		<view class="text-bold text-xl padding-bottom-sm">{{data.title}}</view>
+		<view style="line-height:60rpx;">活动时间：{{utils.convertDatetoString(data.starttime)}} - {{utils.convertDatetoString(data.endtime)}}</view>
+		<view style="line-height:60rpx;">活动地点：{{data.metadata[0].address}}</view>
+	</view>
+	<template is="divider"/>
+	<view class="padding">
+		<view class="text-bold text-xl padding-bottom-sm">活动规则</view>
+		<text style="line-height:60rpx;">{{data.content}}</text>
+	</view>
+	<template is="divider"/>
+	<view class="padding padding-bottom-lg">
+		<block wx:if="{{utils.compareDatenow(data.endtime)<=0?true:false}}">
+		<view class="bg-red text-center text-normal" style="width:100%;line-height:70rpx;height: 70rpx;font-size: 28rpx;border-radius: 5px;" data-url="form" data-formid="{{data.formid}}"	data-id="{{id}}" data-params="{{params}}" bindtap="navigatePage">立即报名</view>
+		
+		</block>
+		<block wx:else>
+		<view class="bg-gray text-center text-normal" style="width:100%;line-height:70rpx;height: 70rpx;font-size: 28rpx;border-radius: 5px;">活动已结束</view>
+		
+		</block>
+	</view>
+</view>
+</template>
+
+<template name="imageCard">
+		<import src="/template/title.wxml" />
+		<block wx:for="{{data}}" wx:for-item="tdata">
+		<view class="margin-left margin-right margin-bottom-xl bg-white text-black" style="border-radius:10rpx;" data-url="/pages/util/images" data-id="{{tdata.id}}" bindtap="navigatePage">
+		<swiper class="radius" style="width: 100%;height: 350rpx;border-bottom:1px solid gray;" current="{{current}}">
+			<block wx:for="{{tdata.metadata[0].projectimages[0].images}}">
+				<block wx:if="{{index<3}}">
+					<swiper-item style="">
+						<image style="width: 100%;height: 350rpx;border-top-left-radius:10rpx;border-top-right-radius:10rpx;" src="{{baseMediaUrl+item.image}}" data-src="{{baseMediaUrl+item.image}}" mode="aspectFill" bindtap="huxingpreviewImage"></image>
+						<view class="padding-left padding-right padding-top-xs padding-bottom-xs text-sm flex" style="width:100%;position: absolute;bottom: 0;color: #ffffff;background-color: rgba(0,25,53,0.75);height:56rpx;overflow: hidden;text-overflow: ellipsis;">
+							<view class="flex-12" style="text-align: justify;overflow: hidden;text-overflow: ellipsis;font-size:26rpx;">{{tdata.title}}</view>
+						</view>
+					</swiper-item>
+				</block>
+			</block>
+		</swiper>
+		<view class="flex padding-sm">
+			<view class="flex-sub text-center">
+				<image style="width:92rpx;height:92rpx;border-radius:50%;" src="{{baseMediaUrl+tdata.featured_images[0].image}}"></image>
+			</view>
+			<view class="flex-treble margin-left-sm" style="">
+				<view class="text-bold" style="font-size:24rpx;line-height:50rpx;height:50rpx;margin-top:5rpx;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;width:300rpx;">{{tdata.metadata[0].author}}</view>
+				<view style="font-size:20rpx;height:40rpx;">{{utils.convertDatetoString(tdata.published_at)}}</view>
+			</view>
+			<view class="flex-twice">
+				<view class="flex" style="margin-top:48rpx;line-height:35rpx;">
+					<view class="flex-sub">
+						<image style="margin-left:10rpx;width:34rpx;height:34rpx;float:left;" src="/img/view-icon.png"></image>
+						<view class="text-center" style="float:left;font-size:11px;width: 50rpx;">{{utils.convertNumToString(tdata.viewcount)}}</view>
+					</view>
+					<view class="flex-sub">
+						<image style="margin-left:10rpx;width:34rpx;height:34rpx;float:left;" src="/img/heart-icon-u.png"></image>
+						<view class="text-center" style="float:left;font-size:11px;width: 50rpx;">{{utils.convertNumToString(tdata.heartcount)}}</view>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+		</block>
+</template>
+
+<template name="videoCard">
+		<import src="/template/title.wxml" />
+		<block wx:for="{{data}}" wx:for-item="tdata">
+		<view class="margin-left margin-right margin-bottom-xl bg-white text-black" style="border-radius:10rpx;" data-url="{{tdata.posttype=='interactivevideo'?'/pages/util/video':'/pages/util/images'}}" data-id="{{tdata.id}}" bindtap="navigatePage">
+		<swiper class="radius" style="width: 100%;height: 350rpx;border-bottom:1px solid gray;" current="{{current}}">
+			<swiper-item style="">
+				<image style="width: 100%;height: 350rpx;border-top-left-radius:10rpx;border-top-right-radius:10rpx;" src="{{baseMediaUrl+tdata.metadata[0].projectimages[0].image}}" data-src="{{baseMediaUrl+tdata.metadata[0].projectimages[0].image}}" mode="aspectFill" bindtap="huxingpreviewImage"></image>
+				<view class="padding-left padding-right padding-top-xs padding-bottom-xs text-sm flex" style="width:100%;position: absolute;bottom: 0;color: #ffffff;background-color: rgba(0,25,53,0.75);height:56rpx;overflow: hidden;text-overflow: ellipsis;">
+					<view class="flex-6" style="text-align: justify;overflow: hidden;text-overflow: ellipsis;font-size:26rpx;">{{tdata.title}}</view>
+					<view class="flex-sub">
+						<view class="flex">
+							<view class="flex-sub text-right"><image src="/img/video-icon-u.png" style="width:36rpx;height:36rpx;"></image></view>
+							<view class="flex-treble" style="line-height:36rpx;" wx:if="{{tdata.metadata[0].projectimages[0].videoduration}}">{{tdata.metadata[0].projectimages[0].videoduration}}</view>
+						</view>
+					 </view>
+				</view>
+			</swiper-item>
+		</swiper>
+		<view class="flex padding-sm">
+			<view class="flex-sub text-center">
+				<image style="width:92rpx;height:92rpx;border-radius:50%;" src="{{baseMediaUrl+tdata.featured_images[0].image}}"></image>
+			</view>
+			<view class="flex-treble margin-left-sm" style="">
+				<view class="text-bold" style="font-size:24rpx;line-height:50rpx;height:50rpx;margin-top:5rpx;overflow: hidden;text-overflow: ellipsis;">{{tdata.metadata[0].author}}</view>
+				<view style="font-size:20rpx;height:40rpx;">{{utils.convertDatetoString(tdata.published_at)}}</view>
+			</view>
+			<view class="flex-twice">
+				<view class="flex" style="margin-top:48rpx;line-height:35rpx;">
+					<view class="flex-sub">
+						<image style="margin-left:10rpx;width:34rpx;height:34rpx;float:left;" src="/img/view-icon.png"></image>
+						<view class="text-center" style="float:left;font-size:11px;width: 50rpx;">{{utils.convertNumToString(tdata.viewcount)}}</view>
+					</view>
+					<view class="flex-sub">
+						<image style="margin-left:10rpx;width:34rpx;height:34rpx;float:left;" src="/img/heart-icon-u.png"></image>
+						<view class="text-center" style="float:left;font-size:11px;width: 50rpx;">{{utils.convertNumToString(tdata.heartcount)}}</view>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+		</block>
+</template>
+
+
+<template name="newsCard">
+		<import src="/template/title.wxml" />
+		<block wx:for="{{data}}" wx:for-item="tdata">
+		<view class="margin-left margin-right margin-bottom-xl bg-white text-black" style="border-radius:10rpx;"  data-url="/pages/news/news" data-id="{{tdata.id}}" bindtap="navigatePage">
+		<!--<view class="flex padding-sm" style="height:110rpx;">
+			<view class="flex-sub text-center">
+				<image style="width:70rpx;height:70rpx;border-radius:50%;" src="{{baseMediaUrl+tdata.metadata[0].logo}}"></image>
+			</view>
+			<view class="flex-6" style="">
+				<view class="text-bold" style="font-size:24rpx;line-height:50rpx;height:50rpx;margin-top:10rpx;overflow: hidden;text-overflow: ellipsis;">{{tdata.metadata[0].author}}</view>
+			</view>
+		</view>-->
+		<swiper style="width: 100%;height: 350rpx;border-bottom:1px solid gray;border-radius:10rpx;" current="{{current}}">
+			<block wx:for="{{tdata.featured_images}}">
+			<swiper-item style="">
+				<image style="width: 100%;height: 350rpx;border-radius:10rpx;" src="{{baseMediaUrl+item.image}}" data-src="{{baseMediaUrl+item.image}}" mode="aspectFill" bindtap="huxingpreviewImage"></image>
+				<view class="bg-red text-center" style="position:absolute;top:0;right:0;font-size:22rpx;width:110rpx;height:40rpx;line-height:40rpx;">{{tdata.albumtitle}}</view>
+			</swiper-item>
+			</block>
+		</swiper>
+		<view class="padding-sm">
+			<view class="text-left text-bold" style="font-size:30rpx;height:100rpx;line-height:50rpx;overflow: hidden;text-overflow: ellipsis;">
+				{{tdata.title}}
+			</view>
+			<!--<view class="text-left" style="font-size:24rpx;height:50rpx;line-height:50rpx;overflow: hidden;text-overflow: ellipsis;">
+				{{tdata.excerpt}}
+			</view>-->
+		</view>
+	</view>
+		</block>
+</template>
+
+
+<template name="newsSquareCard">
+		<import src="/template/title.wxml" />
+		<view class="flex padding-left padding-right" style="flex-wrap: wrap;flex-direction: row;width: 100%;justify-content: space-between;">
+		<block wx:for="{{data}}" wx:for-item="tdata">
+		<view class="margin-bottom bg-white text-black" style="border-radius:15rpx;width: 42vw;"  data-url="/pages/news/newsnoheader" data-id="{{tdata.id}}" bindtap="navigatePage">
+		<!--<view class="flex padding-sm" style="height:110rpx;">
+			<view class="flex-sub text-center">
+				<image style="width:70rpx;height:70rpx;border-radius:50%;" src="{{baseMediaUrl+tdata.metadata[0].logo}}"></image>
+			</view>
+			<view class="flex-6" style="">
+				<view class="text-bold" style="font-size:24rpx;line-height:50rpx;height:50rpx;margin-top:10rpx;overflow: hidden;text-overflow: ellipsis;">{{tdata.metadata[0].author}}</view>
+			</view>
+		</view>-->
+		<swiper class="text-white" style="width: 100%;height: 170rpx;border-radius:15rpx;" current="{{current||0}}">
+			<block wx:for="{{tdata.featured_images}}">
+			<swiper-item style="border-radius:15rpx;">
+				<image style="width: 100%;height: 170rpx;border-radius:15rpx;" src="{{baseMediaUrl+item.image}}" data-src="{{baseMediaUrl+item.image}}" mode="aspectFill"></image>
+				<view class="text-left padding-xs padding-left padding-right" style="font-size:28rpx;max-height:100rpx;line-height:40rpx;overflow: hidden;text-overflow: ellipsis;position: absolute;bottom: 3px;">
+					{{tdata.title}}
+				</view>
+			</swiper-item>
+			</block>
+			<block wx:if="{{utils.count(tdata.featured_images)<1}}">
+			<swiper-item class="bg-gradual-blue" style="border-radius:15rpx;">
+				<image style="width: 100%;height: 170rpx;border-radius:15rpx;" src="{{baseMediaUrl+item.image}}" data-src="{{baseMediaUrl+item.image}}" mode="aspectFill"></image>
+				<view class="text-left padding-xs padding-left padding-right" style="font-size:28rpx;max-height:100rpx;line-height:40rpx;overflow: hidden;text-overflow: ellipsis;position: absolute;bottom: 3px;">
+					{{tdata.title}}
+				</view>
+			</swiper-item>
+			</block>
+		</swiper>
+	</view>
+		</block>
+		</view>
+</template>

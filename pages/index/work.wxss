@@ -1,0 +1,110 @@
+/* pages/index/work.wxss */
+page{
+  background-color: #ffff;
+}
+
+
+/* swiper中的三种字体 */
+.font-one{
+  font-size:125rpx;
+  font-weight:700;
+}
+
+.font-two{
+  font-size:35rpx;
+  color:rgb(172, 170, 171);
+}
+
+.font-three{
+  font-size:60rpx;
+  font-weight: 600;
+}
+
+/*  */
+
+.part-one{
+  height: 70%;
+}
+
+.part-two{
+  height: 20%;
+}
+
+.flex-center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.justify-space-around{
+  display: flex;
+  justify-content: space-around;
+}
+
+.justify-center{
+  display: flex;
+  justify-content: center;
+}
+
+.align-center{
+  display: flex;
+  align-items: center;
+}
+
+.flex-column{
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-row{
+  display: flex;
+  flex-direction: row;
+}
+
+
+.swiperItem{
+  background-color: rgb(238, 238, 238);
+  border-radius: 25rpx;
+  height: 100%;
+  width: 90%;
+}
+
+.swiperShow{
+  height: 60%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.swiperTitle{
+  height: 25%;
+  width: 100%;
+  border-top-left-radius: 25rpx;
+  border-top-right-radius: 25rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30rpx;
+  font-weight: 500;
+}
+
+.bg-light-blue{
+  background-color: rgb(81, 149, 248);
+  color: white;
+}
+
+.bg-light-orange{
+  background-color: rgb(240, 145, 81);
+  color: white;
+}
+
+.bg-light-green{
+  background-color: rgb(57, 176, 110);
+  color: white;
+}
+
+
+
+

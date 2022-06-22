@@ -1,0 +1,98 @@
+<!--pages/index/work.wxml-->
+<view style="height:80rpx"></view>
+<view class="margin-left margin-right padding-top padding-bottom-sm bg-white text-black">
+	<view class="flex">
+		<view class="flex-treble">
+			<view style="font-size:34rpx;font-weight:bold;line-height:34rpx;height:34rpx;">办事</view>
+		</view>
+	</view>
+</view>
+
+<!-- 滑动视图 -->
+<view class=" padding-top padding-bottom-sm bg-white text-black">
+	<swiper indicator-dots="true" style="height:350rpx">
+
+		<swiper-item class="flex-center">
+			<view class="swiperItem">
+				<view class="swiperTitle bg-light-blue">距回校还有</view>
+				<view class="swiperShow">
+					<view class="font-one part-one">18</view>
+					<view class="font-two part-two">2020-08-29 星期六</view>
+				</view>
+			</view>
+		</swiper-item>
+
+		<swiper-item class="flex-center">
+			<view class="swiperItem">
+				<view class="swiperTitle bg-light-orange">距离数字媒体技术考试</view>
+				<view class="swiperShow">
+					<view style="width:100%" class="flex-row justify-space-around">
+						<view class="font-one part-one">39<text style="font-size:35rpx">天</text></view>
+						<view class="flex-column justify-center font-two">
+							<view>课室：<text style="color:black">HF508</text></view>
+							<view>座位：<text style="color:black">41</text></view>
+						</view>
+					</view>
+					<view class="font-two part-two">2020-08-29 星期六 13:00-15:00</view>
+				</view>
+			</view>
+		</swiper-item>
+
+		<swiper-item class="flex-center">
+			<view class="swiperItem">
+				<view class="swiperTitle bg-light-green">周一课表</view>
+				<swiper class="class" vertical="true">
+					<swiper-item>
+						<view class="swiperShow">
+							<view  class="font-three part-one flex-center" >操作系统</view>
+							<view  class="font-two part-two" >3-4节 HH108 龚友明 1-17周</view>
+						</view>
+					</swiper-item>
+
+					<swiper-item>
+						<view class="swiperShow">
+							<view  class="font-three part-one flex-center">概率论与数理统计</view>
+							<view class="font-two part-two">8-10节 MB205 陈旌 1-9周</view>
+						</view>
+					</swiper-item>
+				</swiper>
+			</view>
+		</swiper-item>
+	</swiper>
+</view>
+
+<view class="margin-left margin-right padding-top padding-bottom-sm bg-white text-black">
+	<view class="flex">
+		<view class="flex-treble">
+			<view style="font-size:34rpx;font-weight:bold;line-height:34rpx;height:34rpx;">学习</view>
+		</view>
+	</view>
+</view>
+
+<view class="margin-left margin-right padding-top padding-bottom-sm bg-white text-black">
+
+</view>
+
+<view class="margin-bottom-xs" style="width:100%;height:10px;background:#eee;"></view>
+
+<view class="margin-left margin-right padding-top padding-bottom-sm bg-white text-black">
+	<view class="flex">
+		<view class="flex-treble">
+			<view style="font-size:34rpx;font-weight:bold;line-height:34rpx;height:34rpx;">生活</view>
+		</view>
+	</view>
+</view>
+
+<view class="margin-left margin-right padding-top padding-bottom-sm bg-white text-black">
+
+</view>
+
+<view class="margin-bottom-xs" style="width:100%;height:10px;background:#eee;"></view>
+
+<view class="margin-left margin-right padding-top padding-bottom-sm bg-white text-black">
+	<view class="flex">
+		<view class="flex-treble">
+			<view style="font-size:34rpx;font-weight:bold;line-height:34rpx;height:34rpx;">更多</view>
+		</view>
+	</view>
+</view>

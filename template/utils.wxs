@@ -1,0 +1,68 @@
+var compareDatenow=function(datestr){
+  var firstdate=Date.parse(datestr.replace(getRegExp("-", "g"), '/'));
+  var seconddate=Date.now();
+  if(firstdate<seconddate){
+    return 1;
+  }else if(firstdate==seconddate){
+    return 0;
+  }else{
+    return -1;
+  }
+}
+
+var convertDatetoString=function(datestr){
+  var dates=Date.parse(datestr.replace(getRegExp("-", "g"), '/'));
+  var date = getDate(dates);
+  return date.getFullYear()+"年"+(date.getMonth()+1)+"月"+date.getDate()+"日";
+}
+
+var convertDatetoYear=function(datestr){
+  var dates=Date.parse(datestr.replace(getRegExp("-", "g"), '/'));
+  var date = getDate(dates);
+  return date.getFullYear()+"年";
+}
+
+var count=function(array) {
+  return array.length;
+}
+
+var createArray=function(length) {
+  if(isNaN(length)){
+    length=0;
+  }
+  var a=[];
+  a.length=length;
+  return a;
+}
+
+var intBetween=function(num,min,max) {
+  if(num>=min&&num<=max){
+    return true;
+  }else{
+    return false;
+  }
+}
+
+var convertNumToString=function(num){
+  var str="";
+  if(num>=100000){
+    str="10w+";
+  }else if(num>=10000){
+    str=(num/10000).toFixed(1)+"w";
+  }else if(num>=1000){
+    str=(num/1000).toFixed(1)+"k";
+  }else{
+    str=num+"";
+  }
+  return str;
+}
+
+module.exports={
+  compareDatenow:compareDatenow,
+  convertDatetoString:convertDatetoString,
+  convertDatetoYear:convertDatetoYear,
+  count:count,
+  createArray:createArray,
+  intBetween:intBetween,
+  convertNumToString:convertNumToString
+}
